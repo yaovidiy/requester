@@ -3,6 +3,15 @@
 	let targets = {};
 	const intervals = {};
 
+	const statusCheck = (url) => {
+		const myRequest = new Request(url);
+
+		fetch(myRequest).then(function(response) {
+			console.log(response.status); // returns 200
+		});
+	}
+
+
 	const bomb = (bombTarget) => {
 		const rand = Math.floor(Math.random() * 1000);
 		const url = `${bombTarget}/index.html?${rand}=value`;
