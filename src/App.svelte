@@ -3,13 +3,16 @@
 	let targets = {};
 	const intervals = {};
 
-	const statusCheck = (url) => {
+	const statusCheck = async (url, bombTarget) => {
 		console.log('start check !!!!!')
-		const myRequest = new Request(url);
+		
+		const response = await fetch(bombTarget);
 
-		fetch(myRequest).then(function(response) {
-			console.log('status check', response.status); // returns 200
-		});
+		if (response.ok) {
+			targets[bombTarget].status = 'avaliable';
+		} else {
+			targets[bombTarget].status = response.status;
+		}
 	}
 
 
@@ -32,7 +35,7 @@
 		targets[bombTarget].requested += 1;
 
 		if (targets[bombTarget].requested % 500 === 0) {
-			statusCheck(url);
+			statusCheck(url, bombTarget);
 		}
 	}
 
